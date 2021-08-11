@@ -1,0 +1,80 @@
+; ModuleID = 'LiquidCrystal.c'
+source_filename = "LiquidCrystal.c"
+target datalayout = "e-m:o-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-apple-macosx11.0.0"
+
+%struct.LiquidCrystalStruct = type { i32 }
+
+@.str = private unnamed_addr constant [81 x i8] c"%s (LiquidCrystal * lcd = 0x%x, unsigned int cols = %u, unsigned int rows = %u)\0A\00", align 1
+@__func__.lcd_begin = private unnamed_addr constant [10 x i8] c"lcd_begin\00", align 1
+@.str.1 = private unnamed_addr constant [32 x i8] c"%s (LiquidCrystal * lcd = 0x%x\0A\00", align 1
+@__func__.lcd_clear = private unnamed_addr constant [10 x i8] c"lcd_clear\00", align 1
+@.str.2 = private unnamed_addr constant [66 x i8] c"%s (LiquidCrystal * lcd = 0x%x, char* output = %s, int len = %d)\0A\00", align 1
+@__func__.lcd_print = private unnamed_addr constant [10 x i8] c"lcd_print\00", align 1
+@.str.3 = private unnamed_addr constant [56 x i8] c"%s (LiquidCrystal * lcd = 0x%x, int x = %d, int y = %d\0A\00", align 1
+@__func__.lcd_setCursor = private unnamed_addr constant [14 x i8] c"lcd_setCursor\00", align 1
+
+; Function Attrs: noinline nounwind optnone ssp uwtable
+define void @lcd_begin(%struct.LiquidCrystalStruct* %0, i32 %1, i32 %2) #0 {
+  %4 = alloca %struct.LiquidCrystalStruct*, align 8
+  %5 = alloca i32, align 4
+  %6 = alloca i32, align 4
+  store %struct.LiquidCrystalStruct* %0, %struct.LiquidCrystalStruct** %4, align 8
+  store i32 %1, i32* %5, align 4
+  store i32 %2, i32* %6, align 4
+  %7 = load %struct.LiquidCrystalStruct*, %struct.LiquidCrystalStruct** %4, align 8
+  %8 = load i32, i32* %5, align 4
+  %9 = load i32, i32* %6, align 4
+  %10 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([81 x i8], [81 x i8]* @.str, i64 0, i64 0), i8* getelementptr inbounds ([10 x i8], [10 x i8]* @__func__.lcd_begin, i64 0, i64 0), %struct.LiquidCrystalStruct* %7, i32 %8, i32 %9)
+  ret void
+}
+
+declare i32 @printf(i8*, ...) #1
+
+; Function Attrs: noinline nounwind optnone ssp uwtable
+define void @lcd_clear(%struct.LiquidCrystalStruct* %0) #0 {
+  %2 = alloca %struct.LiquidCrystalStruct*, align 8
+  store %struct.LiquidCrystalStruct* %0, %struct.LiquidCrystalStruct** %2, align 8
+  %3 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([32 x i8], [32 x i8]* @.str.1, i64 0, i64 0), i8* getelementptr inbounds ([10 x i8], [10 x i8]* @__func__.lcd_clear, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone ssp uwtable
+define void @lcd_print(%struct.LiquidCrystalStruct* %0, i8* %1, i32 %2) #0 {
+  %4 = alloca %struct.LiquidCrystalStruct*, align 8
+  %5 = alloca i8*, align 8
+  %6 = alloca i32, align 4
+  store %struct.LiquidCrystalStruct* %0, %struct.LiquidCrystalStruct** %4, align 8
+  store i8* %1, i8** %5, align 8
+  store i32 %2, i32* %6, align 4
+  %7 = load %struct.LiquidCrystalStruct*, %struct.LiquidCrystalStruct** %4, align 8
+  %8 = load i8*, i8** %5, align 8
+  %9 = load i32, i32* %6, align 4
+  %10 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([66 x i8], [66 x i8]* @.str.2, i64 0, i64 0), i8* getelementptr inbounds ([10 x i8], [10 x i8]* @__func__.lcd_print, i64 0, i64 0), %struct.LiquidCrystalStruct* %7, i8* %8, i32 %9)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone ssp uwtable
+define void @lcd_setCursor(%struct.LiquidCrystalStruct* %0, i32 %1, i32 %2) #0 {
+  %4 = alloca %struct.LiquidCrystalStruct*, align 8
+  %5 = alloca i32, align 4
+  %6 = alloca i32, align 4
+  store %struct.LiquidCrystalStruct* %0, %struct.LiquidCrystalStruct** %4, align 8
+  store i32 %1, i32* %5, align 4
+  store i32 %2, i32* %6, align 4
+  %7 = load i32, i32* %5, align 4
+  %8 = load i32, i32* %6, align 4
+  %9 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([56 x i8], [56 x i8]* @.str.3, i64 0, i64 0), i8* getelementptr inbounds ([14 x i8], [14 x i8]* @__func__.lcd_setCursor, i64 0, i64 0), i32 %7, i32 %8)
+  ret void
+}
+
+attributes #0 = { noinline nounwind optnone ssp uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "darwin-stkchk-strong-link" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "probe-stack"="___chkstk_darwin" "stack-protector-buffer-size"="8" "target-cpu"="penryn" "target-features"="+cx16,+cx8,+fxsr,+mmx,+sahf,+sse,+sse2,+sse3,+sse4.1,+ssse3,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { "correctly-rounded-divide-sqrt-fp-math"="false" "darwin-stkchk-strong-link" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "probe-stack"="___chkstk_darwin" "stack-protector-buffer-size"="8" "target-cpu"="penryn" "target-features"="+cx16,+cx8,+fxsr,+mmx,+sahf,+sse,+sse2,+sse3,+sse4.1,+ssse3,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+
+!llvm.module.flags = !{!0, !1, !2}
+!llvm.ident = !{!3}
+
+!0 = !{i32 2, !"SDK Version", [2 x i32] [i32 11, i32 3]}
+!1 = !{i32 1, !"wchar_size", i32 4}
+!2 = !{i32 7, !"PIC Level", i32 2}
+!3 = !{!"Apple clang version 12.0.5 (clang-1205.0.22.11)"}
