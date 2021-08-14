@@ -1,3 +1,6 @@
+# /*
+# Author: Claire Huo
+# */
 #!/bin/bash
 set -v
 objdump -D ff > dump.txt

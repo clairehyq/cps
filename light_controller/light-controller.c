@@ -267,7 +267,7 @@ int main(void)
     // const char METHOD_TURNON[] = "method:turnon;";
     // const char METHOD_TURNOFF[] = "method:turnoff;";
     
-    start = usecs();
+    // start = usecs();
     //cfv_init(1024);
     for (count = 0 ; count < 10; count++)
         listen_to_events(data,0,0,NULL);
@@ -278,8 +278,8 @@ int main(void)
    // }
 
     //cfv_quote();
-    end = usecs();
-    printf("round with attestation time usecs: %lu\n", end - start);
+    // end = usecs();
+    // printf("round with attestation time usecs: %lu\n", end - start);
 
     tdClose();
     return 0;

@@ -1,44 +1,44 @@
-# I guess that requiring people to instal Scons is silly, so I'll add this
-# Makefile.
-
-OPT = ~/work/llvm-env/build/bin/opt
-VM = your-server-ip:~/work/ra-project/evaluation/roverpi-cb/
-
-NOVA_PATH = ~/work/llvm-env/build/lib/
-LLC_ARM = ~/work/llvm-env/build/bin/llc
-
-FILE=insPi.sh
+# /*
+# Author: Claire Huo
+# */
+default: all
+all: tcp rovertcp final clean
 
 tcp: 
-	clang tcp.c -S -emit-llvm -o tcp.bc
+	clang -c tcp.c -o tcp.o
 
 rovertcp:
-	#clang -D_GNU_SOURCE --target=aarch64 -S -emit-llvm light-controller.c -o light-controller.bc
-	clang -S -emit-llvm  rovertcp.c -o rovertcp.bc
+	clang -c rovertcp.c -o rovertcp.o
 
-test-combo: tcp rovertcp 
-	llvm-link tcp.bc rovertcp.bc -o test_combo.bc
+final: rovertcp.c tcp.c
+	clang tcp.o rovertcp.o -lwiringPi -pthread -o ff
 
-opt-combo:
-	$(OPT) -load $(NOVA_PATH)/LLVMNova.so -nova < test_combo.bc > combo.bc 2>err.log
-	$(OPT) -load $(NOVA_PATH)/LLVMCollectCFVHints.so -collect-ibranch-hints-pass -collect-icall-hints-pass -collect-loop-hints-pass < combo.bc > combo_hints.bc 2>>err.log
-	$(LLC_ARM) -march=aarch64  -aarch64-enable-cfv combo_hints.bc -o combo.s
+# objdump -D ff > dump.txt
 
-client: client.c
-	clang client.c -o client
+# 1. SEPERATE ASSEMBLY:
 
-send-combo-bc:
-	scp -i vm test_combo.bc $(VM)
+# tcp: 
+# 	clang -O0 -S tcp.c
 
-fetch-combo-s:
-	scp $(VM)/combo.s . 
+# rovertcp:
+# 	#clang -D_GNU_SOURCE --target=aarch64 -S -emit-llvm light-controller.c -o light-controller.bc
+# 	clang -S rovertcp.c 
 
-fetch-file:
-	scp $(VM)/$(FILE) . 
+# test-combo: tcp rovertcp 
+# 	llvm-link tcp.s rovertcp.s -o test_combo.s
 
-bin: test-combo
-	llc -march=aarch64 test_combo.bc -o combo.s
-	clang combo.s -L../../data/runtime -lm $(LDLIBS)   -lnova -lteec -lc -lwiringPi 
+# 2. BITCODE:
+
+# tcp: 
+# 	clang tcp.c -S -emit-llvm -o tcp.bc
+
+# rovertcp:
+# 	clang -S -emit-llvm  rovertcp.c -o rovertcp.bc
+
+# test-combo: tcp rovertcp
+# 	llvm-link tcp.bc rovertcp.bc -o test_combo.bc
+
+# 3. EXECUTABLE:
 
 .PHONY:	clean
 clean:

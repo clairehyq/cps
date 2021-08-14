@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 	pinMode(MOTOR_RIGHT_B,OUTPUT);
 	/*Starts Main Loop*/
 	printf("Starting Mainloop!\n");
-    start = usecs();
+    // start = usecs();
     //cfv_init(1024);
     
        printf("%s %d\n",__func__, __LINE__);
@@ -77,8 +77,8 @@ int main(int argc, char **argv)
 		delay(500);
 	}
     //cfv_quote();
-    end = usecs();
-    printf("round with attestation time usecs: %lu\n", end - start);
+    // end = usecs();
+    // printf("round with attestation time usecs: %lu\n", end - start);
 
 	Stop_All_Motors();
 	return 0;

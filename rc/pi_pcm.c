@@ -472,7 +472,7 @@ int main(int argc, char** argv) {
 
     printf(" debug line:%d", __LINE__);
 
-    start = usecs();
+    // start = usecs();
    // cfv_init(1024);
 
     while (count++ < 100) {
@@ -631,8 +631,8 @@ int main(int argc, char** argv) {
     }
 
     //cfv_quote();
-    end = usecs();
-    printf("round without attestation time usecs: %lu\n", end - start);
+    // end = usecs();
+    // printf("round without attestation time usecs: %lu\n", end - start);
 
     terminate(0);
 

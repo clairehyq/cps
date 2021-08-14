@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "getopt.h": "c",
+        "telldus-core.h": "c"
+    }
+}
