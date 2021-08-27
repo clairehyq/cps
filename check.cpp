@@ -34,10 +34,16 @@ int main(int argc, char const *argv[])
     int ict_num = 0;
     int read_num = 0;
     int write_num = 0;
+    int all_ins = 0;
 
     if(file.is_open()){
         while(getline(file, line)){
             stringstream iss(line);
+            // Check all Inst
+            if(!line.empty() && (line.substr(0,4) == "    ")){
+                all_ins++;
+            }
+
             // Check Returns:
             if(line.find("bx") != string::npos && line.find("ir") != string::npos){
                 return_num++;
@@ -91,6 +97,7 @@ int main(int argc, char const *argv[])
         }
     }
     cout << "End scanning" << endl;
+    cout << "All Instruction:  " << all_ins << endl;
     cout << "ICT:  " << ict_num << endl;
     cout << "Returns:  " << return_num << endl;
     cout << "Write:  " << write_num << endl;
